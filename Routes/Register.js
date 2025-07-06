@@ -1,7 +1,6 @@
 import express from "express";
 import {
     addRegisterUser,
-    getOneRegisterUser,
     loginUser,
     addTaskToUser,
     getUserTasks,
@@ -12,7 +11,6 @@ import {
 
 const router = express.Router();
 
-router.get("/registerid/:id", getOneRegisterUser);  // Read one
 router.post("/addUsers", addRegisterUser);          // Create
 
 router.post("/login", loginUser);   //login
