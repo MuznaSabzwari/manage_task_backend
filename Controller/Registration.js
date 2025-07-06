@@ -2,18 +2,6 @@ import RegistrationModel from '../Model/Registration.js';
 import bcrypt from 'bcryptjs';
 
 
-
-// Get one user by ID
-export const getOneRegisterUser = async (req, res, next) => {
-  const userId = req.params.id;
-  try {
-    const user = await RegistrationModel.findById(userId).exec();
-    res.status(200).json(user);
-  } catch (error) {
-    next(error);
-  }
-};
-
 // Add/register a new user
 export const addRegisterUser = async (req, res, next) => {
   const { Name, Email, Password, Contact } = req.body;
