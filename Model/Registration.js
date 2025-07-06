@@ -11,7 +11,7 @@ const registrationSchema = new mongoose.Schema({
     {
       title: { type: String },
       description: { type: String },
-      createdAt: { type: Date, default: Date.now }
+      dueDate: {type: String},
     }
   ]
 });

@@ -65,6 +65,7 @@ export const loginUser = async (req, res, next) => {
         success: true,
         message: "Login successful",
         user: {
+          _id: user._id,
           email: user.Email,
           password: user.Password // (hashed password)
         }
@@ -77,13 +78,14 @@ export const loginUser = async (req, res, next) => {
 // Add task to a user
 export const addTaskToUser = async (req, res, next) => {
     const { userId } = req.params;
-    const { title, description } = req.body;
+    const { title, description, dueDate } = req.body;
   
     try {
       const user = await RegistrationModel.findById(userId);
       if (!user) return res.status(404).json({ message: "User not found" });
   
-      user.tasks.push({ title, description });
+      user.tasks.push({ title, description, dueDate });
+
       await user.save();
   
       res.status(201).json({ success: true, message: "Task added", tasks: user.tasks });
