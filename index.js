@@ -14,14 +14,28 @@ mongoose
     process.exit(1);
   });
 
-
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
+
+// CORS setup
+app.use(cors({
+  origin: 'https://686bd4dabee7af0008d469d6--rainbow-rabanadas-c2bfce.netlify.app', // <-- your frontend URL here
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+
+// Handle preflight OPTIONS requests for all routes
+app.options('*', cors({
+  origin: 'https://686bd4dabee7af0008d469d6--rainbow-rabanadas-c2bfce.netlify.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 
 // Middlewares
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors());
 
 // Routes
 app.use("/Register", Register);
